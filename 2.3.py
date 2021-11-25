@@ -9,15 +9,25 @@
 #
 """
 import urllib.request
-with urllib.request.urlopen('http://192.168.11.130') as response:
-    html = response.read()
+import re
 
-from bs4 import BeautifulSoup
-soup = BeautifulSoup(html, 'html.parser')
+def read_IP_Addr():
+    print ("Find external IP Address")
 
-#print(soup.text.lower())
+    #service to display from exnternal IP address
+    #url = "https://whatismyipaddress.com" #forbidden
+    url = "http://checkip.dyndns.org"
+    print(url)
+    request2 = urllib.request.urlopen(url)
+    request = request2.read()
+    print(request)
 
-for link in soup.find_all('a'):
-    print(link.get('href'))
+    request = str(request)
+    theIP = re.findall(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}',request)
+
+    print("your IP Address is: ", theIP)
+
+if __name__=="__main__":
+    read_IP_Addr()
 
 
