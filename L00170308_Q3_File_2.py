@@ -1,5 +1,5 @@
 """
-# File          : 2.1.py
+# File          : L00170308_Q3_File_2.py
 # Created       : 23/11/2021 14:30
 # Author        : C. Tilley
 # Version       : V1.0
@@ -19,10 +19,18 @@ with urllib.request.urlopen('http://192.168.11.130') as response:
 from bs4 import BeautifulSoup
 soup = BeautifulSoup(html, 'html.parser')
 
+#display page into more understandbale format
 print(soup.getText())
 
 #use soup to find headers using class in html page and print result
 page = soup.find_all("div", {"class":"section_header"})
 
+#summary of headers listed with tag/class info
 print(page)
-#output shows each heading with class & tag
+
+#import page look for text without a tag that included 'apache2'
+import re
+def has_class_but_no_id(tag):
+    return tag.has_attr('class') and not tag.has_attr('id')
+
+print(soup.find_all(text=re.compile("apache2")))

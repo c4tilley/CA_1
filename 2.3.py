@@ -17,7 +17,7 @@ soup = BeautifulSoup(html, 'html.parser')
 
 #print(soup.text.lower())
 
-#for link in soup.find_all('a'):
-    #print(link.get('href'))
+for link in soup.find_all('a'):
+    print(link.get('href'))
 
 
