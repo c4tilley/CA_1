@@ -1,6 +1,6 @@
 """
-# File          : Test.py
-# Created       : 23/11/2021 14:30
+# File          : BeautifulSoup.py
+# Created       : 24/11/2021 11:05
 # Author        : C. Tilley
 # Version       : V1.0
 # Licensing     : (C) 2021 Chris Tilley, LYIT
@@ -22,11 +22,3 @@ and they lived at the bottom of a well.</p>
 <p class="story">...</p>
 """
 
-import urllib.request
-with urllib.request.urlopen('http://192.168.11.130') as f:
-    html = response.read()
-
-from bs4 import BeautifulSoup
-soup = BeauitfulSoup(htmlSource)
-
-soup = BeautifulSoup(f)
