@@ -28,20 +28,34 @@ import subprocess
 import sys
 from datetime import datetime
 
-a_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+import paramiko
 
-address = "192.168.11.130"
-port = int(input('Please enter port: '))
+hostname = "192.168.11.130"
+username = "l00170308"
+password = "7113"
 
-location = ((address), (port))
-result_of_check = a_socket.connect_ex(location)
+commands = ["pwd","id","uname -a", 'mkdir -p Labs/{Lab1,Lab2}', 'ls -l --time=atime', 'stat /home']
 
-#if result_of_check == 0 and 80:
-   #print("HTML Port 80 is open")
-#if result_of_check == 0 and 22:
-#print("SSH Port 22 is open")
-if result_of_check == 0:
-    print("Port is open")
-else:
-   print("Port is not open")
+#command_input = input(f"l00170308@ubuntu:-$:"  )#
 
+# initialize the SSH client
+client = paramiko.SSHClient()
+# add to known hosts
+client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+try:
+    client.connect(hostname=hostname, username=username, password=password)
+except:
+    print ("Unable to connect")
+    client.close()
+
+
+for command in commands:
+
+    stdin, stdout, stderr = client.exec_command(command)
+    print(stdout.read().decode())
+    error = stderr.read().decode()
+    if error:
+        print(error)
+
+client.close()
