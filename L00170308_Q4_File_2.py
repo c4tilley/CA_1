@@ -42,7 +42,7 @@ def port_scan():
 # both arguments have different variable - if its related to port 22 - display SSH, if its port 80 - display HTML.
 
    try:
-      for port in range(20, 81):
+      for port in range(0, 1023):
          sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
          result = sock.connect_ex((remoteServerIP, port))
          if result == 0 and (port == 22):
