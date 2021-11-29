@@ -47,8 +47,10 @@ def port_scan():
          result = sock.connect_ex((remoteServerIP, port))
          if result == 0 and (port == 22):
             print ("Port SSH {}: Open".format(port))
-         elif result == 0 and (port == 80):
+         if result == 0 and (port == 80):
             print ("Port HTML {}: Open".format(port))
+         elif result == 0:
+            print ("Port {}: Open".format(port))
          sock.close()
 # keyboard interrupt if process stalls
    except KeyboardInterrupt:
