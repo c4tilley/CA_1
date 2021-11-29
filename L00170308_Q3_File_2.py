@@ -20,7 +20,7 @@ def ssh_connection(ip):
     try:
         username = "l00170308"
         password = "7113"
-# feedback if succesfully connect or error occurs
+# feedback if successfully connect or error occurs
         print("Establishing a connection...")
         session = paramiko.SSHClient()
         session.set_missing_host_key_policy(paramiko.AutoAddPolicy())
