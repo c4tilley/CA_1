@@ -40,18 +40,16 @@ def port_scan():
    t1 = datetime.now()
 # test ports from range(value,value). Two arguments made with same 0 open requirement.
 # both arguments have different variable - if its related to port 22 - display SSH, if its port 80 - display HTML.
-
    try:
-      for port in range(0, 1023):
+      for port in range(19, 81):
          sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
          result = sock.connect_ex((remoteServerIP, port))
          if result == 0 and (port == 22):
             print ("Port SSH {}: Open".format(port))
          if result == 0 and (port == 80):
             print ("Port HTML {}: Open".format(port))
-         elif result == 0:
+         elif result == [0]:
             print ("Port {}: Open".format(port))
-         sock.close()
 # keyboard interrupt if process stalls
    except KeyboardInterrupt:
       print ("you pressed Ctrl+C")
@@ -69,7 +67,6 @@ def port_scan():
    total = t2 - t1
 
    print ("Scanning Completed in: ",total)
-
 
 if __name__=="__main__":
    port_scan()

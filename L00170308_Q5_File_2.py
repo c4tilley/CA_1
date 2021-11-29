@@ -10,10 +10,11 @@
 """
 import paramiko
 
+# address and user/pass established for SSH connection
 hostname = "192.168.11.130"
 username = "l00170308"
 password = "7113"
-
+# commands for remote ubuntu terminal
 commands = ["pwd","id","uname -a", 'mkdir -p Labs/{Lab1,Lab2}', 'ls -l --time=atime', 'stat /home']
 
 #command_input = input(f"l00170308@ubuntu:-$:"  )#
