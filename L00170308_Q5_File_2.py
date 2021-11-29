@@ -15,9 +15,9 @@ hostname = "192.168.11.130"
 username = "l00170308"
 password = "7113"
 # commands for remote ubuntu terminal
-commands = ["pwd","id","uname -a", 'mkdir -p Labs/{Lab1,Lab2}', 'ls -l --time=atime', 'stat /home']
+commands = ["pwd", "id", "uname -a", 'mkdir -p Labs/{Lab1,Lab2}', 'ls -l --time=atime', 'stat /home']
 
-#command_input = input(f"l00170308@ubuntu:-$:"  )#
+# command_input = input(f"l00170308@ubuntu:-$:"  )#
 
 # initialize the SSH client
 client = paramiko.SSHClient()
@@ -27,7 +27,7 @@ client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 try:
     client.connect(hostname=hostname, username=username, password=password)
 except:
-    print ("Unable to connect")
+    print("Unable to connect")
     client.close()
 
 
