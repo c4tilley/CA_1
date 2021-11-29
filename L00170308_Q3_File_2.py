@@ -1,6 +1,6 @@
 """
 # File          : L00170308_Q3_File_2.py
-# Created       : 23/11/2021 14:30
+# Created       : 25/11/2021 14:18
 # Author        : C. Tilley
 # Version       : V1.0
 # Licensing     : (C) 2021 Chris Tilley, LYIT
@@ -8,29 +8,52 @@
 # Description   : DCM_2021_LYIT
 #
 """
-#prep urlib module.
-#urlirb.request used to fetch specific URL, confirm successful response (no errors).
-import urllib.request
-with urllib.request.urlopen('http://192.168.11.130') as response:
-    html = response.read()
-
-#prep BeautifulSoup and pull html data
-#print readable text only from data
-from bs4 import BeautifulSoup
-soup = BeautifulSoup(html, 'html.parser')
-
-#display page into more understandbale format
-print(soup.getText())
-
-#use soup to find headers using class in html page and print result
-page = soup.find_all("div", {"class":"section_header"})
-
-#summary of headers listed with tag/class info
-print(page)
-
-#import page look for text without a tag that included 'apache2'
+import paramiko
+import time
 import re
-def has_class_but_no_id(tag):
-    return tag.has_attr('class') and not tag.has_attr('id')
 
-print(soup.find_all(text=re.compile("apache2")))
+def ssh_connection(ip):
+    try:
+        username = "l00170308"
+        password = "7113"
+
+        print("Establishing a connection...")
+        session = paramiko.SSHClient()
+        session.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        session.connect(ip.rstrip("\n"), username=username, password=password)
+        connection = session.invoke_shell()
+        connection.send("ls > dir_contents.txt \n")
+        time.sleep(1)
+
+        vm_output = connection.recv(65535)
+        if re.search(b"%Invalid input", vm_output):
+            print("There was an error on vm{}".format(ip))
+        else:
+            print("Commands successfully executed on{}".format(ip))
+        session.close()
+    except paramiko.AuthenticationException:
+        print("Authentication Error")
+
+ssh_connection("192.168.11.130")
+
+host = "192.168.11.130"
+port = 22
+username = "l00170308"
+password = "7113"
+
+command = "ls"
+ssh = paramiko.SSHClient()
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+ssh.connect(host, port, username, password)
+
+#stdin, stdout, stderr = ssh.exec_command(command)
+#lines = stdout.readlines()
+#print(lines)
+
+#ssh.connect(host=host, port=port, username=username, password=password)
+#paramiko.AutoAddPolicy(set_missing_host_key_policy)
+#
+
+stdin, stdout, stderr = ssh.exec_command(command)
+lines = stdout.readlines()
+print(lines)

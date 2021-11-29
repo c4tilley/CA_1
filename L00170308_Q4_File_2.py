@@ -35,7 +35,7 @@ def port_scan():
    t1 = datetime.now()
 
    try:
-      for port in range(1, 1025):
+      for port in range(21, 30):
          sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
          result = sock.connect_ex((remoteServerIP, port))
          if result == 0:
@@ -62,3 +62,12 @@ def port_scan():
 if __name__=="__main__":
    port_scan()
 
+a_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+address = ("192.168.11.130", 23)
+if a_socket.connect_ex(address) == 0:
+   print("Port is open")
+else:
+   print("Port is not open")
+
+   socket.getaddrinfo("192.168.11.130", 22)
+   print(socket.getaddrinfo("192.168.11.130", 22))
