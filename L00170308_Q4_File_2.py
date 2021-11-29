@@ -59,11 +59,11 @@ def port_scan():
    except socket.gaierror:
       print("Hostname could not be resolved. Exiting")
       sys.exit()
-# if no response from scoket error
+# if no response from socket error
    except socket.error:
       print("Couldn't connect to server")
       sys.exit()
-# define current time after process finished and subctract intial time to calcualte totoal and display.
+# define current time after process finished and subtract initial time to calculate total and display.
    t2 = datetime.now()
    total = t2 - t1
 
